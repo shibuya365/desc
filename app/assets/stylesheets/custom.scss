@@ -31,3 +31,8 @@ input, textarea, select, .uneditable-input {
     color: $state-danger-text;
   }
 }
+
+#footer-menu {
+  position: fixed;
+  bottom: 0; /*下に固定*/
+}
