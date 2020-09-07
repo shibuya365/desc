@@ -10,10 +10,12 @@
         ⚙️Account<span class="caret"></span>
       </button>
       <div class="dropdown-menu dropdown-menu-right" role="menu">
+        <%= link_to "Users", users_path, class: "btn btn-info" %>
         <%= link_to "Settings", edit_user_path(current_user), class: "btn btn-info" %>
         <%= link_to "Log out", session_path(current_user), method: :delete, class: "btn btn-info" %>
       </div>
     </div>
+    
   <% else %>
     <%= link_to "👤You", new_session_path, class: "btn btn-primary" %>
     <div class="btn-group dropup">

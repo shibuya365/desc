@@ -1,4 +1,5 @@
 class SessionsController < ApplicationController
+
   def new
   end
 
@@ -7,9 +8,9 @@ class SessionsController < ApplicationController
     if @user && @user.authenticate(params[:session][:password])
       log_in @user
       params[:session][:remember_me] == '1' ? remember(@user) : forget(@user)
-      redirect_to @user
+      redirect_back_or @user
     else
-      flash.now[:danger] = 'Invalid name/password combination' # 本当は正しくない
+      flash.now[:danger] = 'Invalid name/password combination'
       render 'new'
     end
   end
