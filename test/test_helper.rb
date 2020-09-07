@@ -15,4 +15,18 @@ class ActiveSupport::TestCase
     !session[:user_id].nil?
   end
 
+  # テストユーザーとしてログインする
+  def log_in_as(user)
+    session[:user_id] = user.id
+  end
+
+end
+
+
+class ActionDispatch::IntegrationTest
+
+  # テストユーザーとしてログインする
+  def log_in_as(user, password: 'password', remember_me: '1')
+    post sessions_path, params: { session: { name: user.name, password: password, remember_me: remember_me } }
+  end
 end
