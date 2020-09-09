@@ -10,7 +10,7 @@ class UsersEditTest < ActionDispatch::IntegrationTest
     log_in_as(@user)
     get edit_user_path(@user)
     assert_template 'users/edit'
-    patch user_path(@user), params: { user: { name: "", password:              "foo", password_confirmation: "bar" } }
+    patch user_path(@user), params: { user: { name: "", password: "foo", password_confirmation: "bar" } }
     assert_template 'users/edit'
     assert_select 'div.alert', 'The form contains 3 errors.'
   end

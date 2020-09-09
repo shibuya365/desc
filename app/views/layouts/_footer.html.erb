@@ -1,9 +1,9 @@
 <div id="footer-menu" class="btn-group btn-group-justified">
-  <%= link_to "Home", "#", class: "btn btn-primary" %>
-  <a href="#" class="btn btn-primary">👥Every</a>
+  <%= link_to "Home", root_path, class: "btn btn-primary" %>
+  <%= link_to "👥Every", posts_path, class: "btn btn-primary" %>
 
   <% if logged_in? %>
-    <%= link_to "👤You", current_user, class: "btn btn-primary" %>
+    <%= link_to "👤#{current_user.name}" , current_user, class: "btn btn-primary" %>
 
     <div class="btn-group dropup">
       <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

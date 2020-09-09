@@ -6,6 +6,9 @@
   </head>
 
   <body>
+
+  <%= link_to "+", new_post_path, id:"btn-new-post", class: "btn btn-primary" %>
+
     <div class="container">
       <% flash.each do |message_type, message| %>
         <%= content_tag(:div, message, class: "alert alert-#{message_type}") %>

@@ -13,6 +13,32 @@
 //   @include box_sizing;
 // }
 
+
+#btn-new-post {
+  position: fixed;
+  right: 5vw;
+  bottom: 10vh;
+}
+
+#new_post {
+  .field {
+    height: 80vh;
+  }
+}
+
+#post_content {
+  margin-top: 5vh;
+  height: 100%;
+  resize: none;
+  overflow-y: scroll;
+}
+
+
+
+
+
+
+
 /* forms */
 
 input, textarea, select, .uneditable-input {
@@ -62,3 +88,46 @@ input, textarea, select, .uneditable-input {
     border-bottom: 1px solid $gray-lighter;
   }
 }
+
+/* posts */
+
+.posts {
+  list-style: none;
+  padding: 0;
+  li {
+    padding: 1vh 0;
+    border-top: 1px solid #e8e8e8;
+  }
+  .user {
+    // margin-top: 5em;
+    // padding-top: 0;
+  }
+  .content {
+    display: block;
+    margin-left: 5vw;
+    // img {
+    //   display: block;
+    //   padding: 5px 0;
+    // }
+  }
+
+  .timestamp {
+    color: $gray-light;
+    display: block;
+    margin-left: 5vw;
+  }
+}
+
+// aside {
+//   textarea {
+//     height: 100px;
+//     margin-bottom: 5px;
+//   }
+// }
+
+// span.picture {
+//   margin-top: 10px;
+//   input {
+//     border: 0;
+//   }
+// }

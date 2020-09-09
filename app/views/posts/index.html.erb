@@ -1,0 +1,11 @@
+<% provide(:title, @title) %>
+
+<h1>All posts</h1>
+
+<%= will_paginate @posts %>
+
+<ol class="posts">
+  <%= render @posts %>
+</ol>
+
+<%= will_paginate @posts %>
