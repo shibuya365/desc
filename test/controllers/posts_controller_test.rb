@@ -21,7 +21,7 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
   end
 
   # test "should get show" do
-  #   get post_path(@user)
+  #   get post_path(@post)
   #   assert_response :success
   #   assert_select "title", "#{@user.name} | #{@base_title}"
   # end
@@ -29,12 +29,36 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
   test "should get new" do
     get new_post_path
     assert_response :success
+    assert_select "title", "New post | #{@base_title}"
+  end
+
+  test "should get post" do
+    log_in_as(@user)
+    post posts_path, params:  { post: { content: "Hello!" } }
+    assert_not flash.empty?
+    assert_redirected_to root_path
   end
 
   # test "should get edit" do
-  #   get edit_user_path(@user)
+  #   get edit_post_path(@post)
   #   assert_response :success
   # end
+
+  test "should not get destroy without login" do
+    assert_no_difference 'Post.count' do
+      delete post_path(@user.posts.first)
+    end
+
+  end
+
+  test "should get destroy with login" do
+    assert_difference 'Post.count', -1 do      
+      log_in_as(@user)
+      delete post_path(@user.posts.first)
+      assert_not flash.empty?
+      assert_redirected_to root_path
+    end
+  end
 
 
   # test "should redirect create when not logged in" do
