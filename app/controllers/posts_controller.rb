@@ -25,9 +25,9 @@ class PostsController < ApplicationController
   end
 
   def create
-    user = current_user
-    user ||= User.find_by(name: "Guest")
-    @post = user.posts.build(post_params)
+    # user = current_user
+    # user ||= User.find_by(name: "Guest")
+    @post = current_or_guest.posts.build(post_params)
     if @post.save
       flash[:success] = "Post created!"
       redirect_to root_url
@@ -59,10 +59,10 @@ class PostsController < ApplicationController
 
   def append
     if !params[:post][:addendum].blank?
-      user = current_user
-      user ||= User.find_by(name: "Guest")
+      # user = current_user
+      # user ||= User.find_by(name: "Guest")
       @post = Post.find(params[:id])
-      @post.content += "\n" + "---" + "\n" + Time.now.to_s + "\n" + user.name + "\n" + params[:post][:addendum]
+      @post.content += "\n" + "---" + "\n" + Time.now.to_s + "\n" + current_or_guest.name + "\n" + params[:post][:addendum]
       @post.save
     end
     redirect_back_or(root_url)

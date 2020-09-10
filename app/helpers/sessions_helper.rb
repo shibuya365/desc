@@ -63,5 +63,11 @@ module SessionsHelper
   def previous_location
     session[:forwarding_url] = request.referrer if request.get?
   end
+
+  def current_or_guest
+    user = current_user
+    user ||= User.find_by(name: "Guest")
+  end
+
   
 end
