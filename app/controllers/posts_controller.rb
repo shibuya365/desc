@@ -16,6 +16,7 @@ class PostsController < ApplicationController
   def show
     previous_location
     @post = Post.find(params[:id])
+    @post.update_attribute(:created_at, Time.now)
     render 'edit' if current_user?(@post.user)
   end
   
@@ -61,7 +62,7 @@ class PostsController < ApplicationController
       user = current_user
       user ||= User.find_by(name: "Guest")
       @post = Post.find(params[:id])
-      @post.content += "\n" + "---" + "\n" + Date.today.to_s + "\n" + user.name + "\n" + params[:post][:addendum]
+      @post.content += "\n" + "---" + "\n" + Time.now.to_s + "\n" + user.name + "\n" + params[:post][:addendum]
       @post.save
     end
     redirect_back_or(root_url)

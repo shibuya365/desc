@@ -31,6 +31,7 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
   test "should get show" do
     get post_path(@post)
     assert_response :success
+    assert_equal @post, Post.all.order(created_at: "DESC").first
     assert_select "title", "Post | #{@base_title}"
   end
 
@@ -130,14 +131,14 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
     content = @post.content
     patch append_post_path(@post), params: { post: { addendum: "addendum"} }
     @post.reload
-    assert_equal( @post.content, content + "\n" + "---" + "\n" + Date.today.to_s + "\n" + @user.name + "\n" + "addendum")
+    assert_equal( @post.content, content + "\n" + "---" + "\n" + Time.now.to_s + "\n" + @user.name + "\n" + "addendum")
   end
 
   test "add append post without loggin" do
     content = @post.content
     patch append_post_path(@post), params: { post: { addendum: "addendum"} }
     @post.reload
-    assert_equal( @post.content, content + "\n" + "---" + "\n" + Date.today.to_s + "\n" + "Guest" + "\n" + "addendum")
+    assert_equal( @post.content, content + "\n" + "---" + "\n" + Time.now.to_s + "\n" + "Guest" + "\n" + "addendum")
   end
 
 end
