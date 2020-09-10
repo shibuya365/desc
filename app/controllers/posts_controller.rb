@@ -15,11 +15,13 @@ class PostsController < ApplicationController
   end
 
   def show
+    previous_location
+    @post = Post.find(params[:id])
+    render 'edit' if current_user?(@post.user)
   end
   
   def new
     @post = Post.new
-    # @post = current_user.posts.build if logged_in?
   end
 
   def create
@@ -35,15 +37,34 @@ class PostsController < ApplicationController
   end
 
   def edit
+    previous_location
+    @post = Post.find(params[:id])
   end
 
   def update
+    @post = Post.find(params[:id])
+    if params[:post][:addendum] == nil
+      if @post.update_attributes(post_params)
+        flash[:success] = "Post updated"
+      else
+        render 'show'
+      end
+    else
+      @post.content += "\n"
+      @post.content += params[:post][:addendum]
+      @post.save
+    end
+    redirect_back_or(root_url)
   end
   
   def destroy
     @post.destroy
     flash[:success] = "Post deleted"
     redirect_to request.referrer || root_url
+  end
+
+  def append
+
   end
 
   private

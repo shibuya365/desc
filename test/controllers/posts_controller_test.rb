@@ -20,11 +20,11 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
     assert_select "title", "Everyone touched | #{@base_title}"
   end
 
-  # test "should get show" do
-  #   get post_path(@post)
-  #   assert_response :success
-  #   assert_select "title", "#{@user.name} | #{@base_title}"
-  # end
+  test "should get show" do
+    get post_path(@post)
+    assert_response :success
+    assert_select "title", "Post | #{@base_title}"
+  end
 
   test "should get new" do
     get new_post_path

@@ -104,17 +104,17 @@ input, textarea, select, .uneditable-input {
   }
   .content {
     display: block;
-    margin-left: 5vw;
-    // img {
-    //   display: block;
-    //   padding: 5px 0;
-    // }
+    margin-left: 3vw;
   }
 
   .timestamp {
     color: $gray-light;
-    display: block;
-    margin-left: 5vw;
+    // display: block;
+    margin-left: 3vw;
+  }
+
+  .btn-info {
+    margin-left: 3vw;
   }
 }
 
