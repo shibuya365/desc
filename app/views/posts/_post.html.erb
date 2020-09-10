@@ -1,9 +1,9 @@
 <li id="post-<%= post.id %>">
   <span class="user"><%= link_to post.user.name, post.user %></span>
-  <span class="content ml-5"><%= link_to post.content, post %></span>
+  <span class="content"><%= link_to post.content, post %></span>
   <% if current_user?(post.user) %>
-    <%= link_to "delete", post, method: :delete, class: "btn btn-info btn-sm ml-2", data: { confirm: "You sure?" } %>
+    <%= link_to "delete", post, method: :delete, class: "btn btn-info btn-sm", data: { confirm: "You sure?" } %>
   <% end %>
-  <p class="timestamp d-block mx-5">Posted <%= time_ago_in_words(post.updated_at) %> ago.</p>
+  <p class="timestamp d-block">Posted <%= time_ago_in_words(post.updated_at) %> ago.</p>
 
 </li>
