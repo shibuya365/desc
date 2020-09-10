@@ -7,12 +7,12 @@
       <p class="timestamp">Posted <%= time_ago_in_words(@post.updated_at) %> ago.</p>
       <%= simple_format @post.content %>
     </section>
-    <%= form_for(@post) do |f| %>
+    <%= form_for @post, url: append_post_path(@post) do |f| %>
       <%= render 'shared/error_messages', object: f.object  %>
       <div class="field">
         <%= f.text_area :addendum, placeholder: "Add post..." %>
       </div>
       <%= f.submit "Add", class: "btn btn-primary" %>
     <% end %>
-</aside>
+  </aside>
 </div>

@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
-  before_action :logged_in_user, only: :destroy
-  before_action :correct_user,   only: :destroy
+  before_action :logged_in_user, only: [:edit, :update, :destroy]
+  before_action :correct_user,   only: [:edit, :update, :destroy]
 
   def home
     @title = "Edited by everyone"
@@ -8,7 +8,6 @@ class PostsController < ApplicationController
     render 'index'
   end
 
-  
   def index
     @title = "Everyone touched"
     @posts = Post.all.order(created_at: "DESC").paginate(page: params[:page])
@@ -40,21 +39,15 @@ class PostsController < ApplicationController
     previous_location
     @post = Post.find(params[:id])
   end
-
+  
   def update
     @post = Post.find(params[:id])
-    if params[:post][:addendum] == nil
-      if @post.update_attributes(post_params)
-        flash[:success] = "Post updated"
-      else
-        render 'show'
-      end
+    if @post.update_attributes(post_params)
+      flash[:success] = "Post updated"
+      redirect_back_or(root_url)
     else
-      @post.content += "\n"
-      @post.content += params[:post][:addendum]
-      @post.save
+      render 'show'
     end
-    redirect_back_or(root_url)
   end
   
   def destroy
@@ -64,7 +57,14 @@ class PostsController < ApplicationController
   end
 
   def append
-
+    if params[:post][:addendum] != nil
+      user = current_user
+      user ||= User.find_by(name: "Guest")
+      @post = Post.find(params[:id])
+      @post.content += "\n" + "---" + "\n" + Date.today.to_s + "\n" + user.name + "\n" + params[:post][:addendum]
+      @post.save
+    end
+    redirect_back_or(root_url)
   end
 
   private

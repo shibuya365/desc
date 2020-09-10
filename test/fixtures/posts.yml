@@ -18,7 +18,12 @@ cat_video:
   created_at: <%= 2.hours.ago %>
   user: michael
 
-most_recent:
+most_recent_created:
+  content: "Writing a short test"
+  created_at: <%= Time.zone.now %>
+  user: michael
+
+most_recent_updated:
   content: "Writing a short test"
   created_at: <%= Time.zone.now %>
   user: michael

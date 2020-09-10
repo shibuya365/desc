@@ -47,4 +47,5 @@ class PostsInterfaceTest < ActionDispatch::IntegrationTest
     assert_match "Posts (1)", response.body
   end
 
+
 end
