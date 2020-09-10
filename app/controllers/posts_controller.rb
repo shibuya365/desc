@@ -58,7 +58,7 @@ class PostsController < ApplicationController
   end
 
   def append
-    if params[:post][:addendum] != nil
+    if !params[:post][:addendum].blank?
       user = current_user
       user ||= User.find_by(name: "Guest")
       @post = Post.find(params[:id])
