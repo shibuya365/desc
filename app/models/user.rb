@@ -1,5 +1,8 @@
 class User < ApplicationRecord
   has_many :posts, dependent: :destroy
+  has_many :likes, dependent: :destroy
+  # 大丈夫？不安
+  has_many :like_posts, through: :likes, source: :post, dependent: :destroy
 
   attr_accessor :remember_token
 
@@ -36,5 +39,11 @@ class User < ApplicationRecord
   def forget
     update_attribute(:remember_digest, nil)
   end
+
+  ## like
+  # like追加
+  # def like(post)
+  #   like_posts << opost
+  # end
 
 end
