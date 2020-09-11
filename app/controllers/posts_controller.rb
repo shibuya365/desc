@@ -25,8 +25,6 @@ class PostsController < ApplicationController
   end
 
   def create
-    # user = current_user
-    # user ||= User.find_by(name: "Guest")
     @post = current_or_guest.posts.build(post_params)
     if @post.save
       flash[:success] = "Post created!"
@@ -36,10 +34,10 @@ class PostsController < ApplicationController
     end
   end
 
-  def edit
-    previous_location
-    @post = Post.find(params[:id])
-  end
+  # def edit
+  #   previous_location
+  #   @post = Post.find(params[:id])
+  # end
   
   def update
     @post = Post.find(params[:id])
@@ -59,8 +57,6 @@ class PostsController < ApplicationController
 
   def append
     if !params[:post][:addendum].blank?
-      # user = current_user
-      # user ||= User.find_by(name: "Guest")
       @post = Post.find(params[:id])
       @post.content += "\n" + "---" + "\n" + Time.now.to_s + "\n" + current_or_guest.name + "\n" + params[:post][:addendum]
       @post.save

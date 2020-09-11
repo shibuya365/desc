@@ -3,12 +3,12 @@ class UsersController < ApplicationController
   before_action :correct_user,   only: [:edit, :update]
 
   def index
-    @users = User.paginate(page: params[:page])
+    @users = User.order(updated_at: "DESC").paginate(page: params[:page])
   end
 
   def show
     @user = User.find(params[:id])
-    @posts = @user.posts.paginate(page: params[:page])
+    @posts = @user.posts.order(updated_at: "DESC").paginate(page: params[:page])
   end
   
   def new
@@ -20,7 +20,6 @@ class UsersController < ApplicationController
     if @user.save
       log_in @user
       flash[:success] = "Welcome to DESC!"
-      # = redirect_to user_url(@user)
       redirect_to @user
     else
       render 'new'

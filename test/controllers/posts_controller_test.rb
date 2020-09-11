@@ -94,10 +94,11 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
   end
 
   # 7 destroy
-  test "should not get destroy without login" do
+  test "should redirect destroy when not logged in" do
     assert_no_difference 'Post.count' do
-      delete post_path(@user.posts.first)
+      delete post_path(@post)
     end
+    assert_redirected_to new_session_path
   end
 
   test "should get destroy with login" do
@@ -107,13 +108,6 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
       assert_not flash.empty?
       assert_redirected_to root_path
     end
-  end
-
-  test "should redirect destroy when not logged in" do
-    assert_no_difference 'Post.count' do
-      delete post_path(@post)
-    end
-    assert_redirected_to new_session_path
   end
 
   test "should redirect destroy for wrong post" do
@@ -126,7 +120,7 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
   end
 
   # append
-  test "add append post with loggin" do
+  test "should get append with loggin" do
     log_in_as(@user)
     content = @post.content
     patch append_post_path(@post), params: { post: { addendum: "addendum"} }
@@ -134,11 +128,18 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
     assert_equal( @post.content, content + "\n" + "---" + "\n" + Time.now.to_s + "\n" + @user.name + "\n" + "addendum")
   end
 
-  test "add append post without loggin" do
+  test "should get append without loggin" do
     content = @post.content
     patch append_post_path(@post), params: { post: { addendum: "addendum"} }
     @post.reload
     assert_equal( @post.content, content + "\n" + "---" + "\n" + Time.now.to_s + "\n" + "Guest" + "\n" + "addendum")
+  end
+
+  test "should not get append if blank?" do
+    content = @post.content
+    patch append_post_path(@post), params: { post: { addendum: ""} }
+    @post.reload
+    assert_equal( @post.content, content)
   end
 
 end
