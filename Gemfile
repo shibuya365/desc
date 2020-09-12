@@ -2,6 +2,11 @@ source 'https://rubygems.org'
 
 gem 'rails',                   '5.1.6'
 
+# マークダウン形式で表示するためのgem
+gem 'redcarpet', '~> 2.3.0'
+# シンタックスハイライトに対応させるためのgem
+gem 'coderay'
+
 # 最先端のハッシュ関数
 gem 'bcrypt'
 

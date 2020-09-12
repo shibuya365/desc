@@ -5,7 +5,7 @@
     <section class="post_info">
       <h3><%= link_to @post.user.name, @post.user %></h3>
       <p class="timestamp">Posted <%= time_ago_in_words(@post.created_at) %> ago.</p>
-      <%= simple_format @post.content %>
+      <%= markdown(@post.content).html_safe %>
     </section>
     <%= form_for @post, url: append_post_path(@post) do |f| %>
       <%= render 'shared/error_messages', object: f.object  %>
