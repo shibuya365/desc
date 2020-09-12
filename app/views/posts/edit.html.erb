@@ -2,6 +2,10 @@
 
 <div class="row">
   <aside class="col">
+    <section class="post_info">
+      <p class="timestamp">Posted <%= time_ago_in_words(@post.created_at) %> ago.</p>
+      <%= markdown(@post.content).html_safe %>
+    </section>
     <section class="post_form">
       <%= form_for(@post) do |f| %>
         <%= render 'shared/error_messages', object: f.object  %>

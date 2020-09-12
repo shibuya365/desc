@@ -9,7 +9,15 @@ module ApplicationHelper
         tables: true,
         fenced_code_blocks: true,
         autolink: true,
+        quote: true,
+        disable_indented_code_blocks: true,
+        strikethrough: true,
+        lax_spacing: true,
+        space_after_headers: true,
+        underline: true,
+        highlight: true,
         quote: true
+
       }
       renderer = Redcarpet::Render::HTML.new(options)
       @markdown = Redcarpet::Markdown.new(renderer, extensions)
