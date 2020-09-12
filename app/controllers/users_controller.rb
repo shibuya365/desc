@@ -8,7 +8,8 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @posts = @user.posts.order(updated_at: "DESC").paginate(page: params[:page])
+
+    @posts = @user.like_posts.all.order(updated_at: "DESC").paginate(page: params[:page])
   end
   
   def new

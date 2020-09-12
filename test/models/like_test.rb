@@ -4,7 +4,7 @@ class LikeTest < ActiveSupport::TestCase
 
   def setup
     @user = users(:michael)
-    @post = posts(:orange)
+    @post = posts(:most_recent_updated)
     @like = Like.new(user_id: @user.id, post_id: @post.id)
     # @like = @user.likes.build(post_id: @post.id)
   end
@@ -34,8 +34,6 @@ class LikeTest < ActiveSupport::TestCase
     @user.like_posts.find(@post.id).destroy
     # postにtouchしてないことを確認
     assert_not @user.like_posts.include?(@post)
-
   end
-
 
 end

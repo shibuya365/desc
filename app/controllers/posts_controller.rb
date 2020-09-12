@@ -4,19 +4,24 @@ class PostsController < ApplicationController
 
   def home
     @title = "Edited by everyone"
-    @posts = Post.all.order(updated_at: "DESC").paginate(page: params[:page])
+    @posts = Post.all.order(created_at: "DESC").paginate(page: params[:page])
     render 'index'
   end
 
   def index
     @title = "Everyone touched"
-    @posts = Post.all.order(created_at: "DESC").paginate(page: params[:page])
+    @posts = Post.all.order(updated_at: "DESC").paginate(page: params[:page])
   end
 
   def show
     previous_location
     @post = Post.find(params[:id])
-    @post.update_attribute(:created_at, Time.now)
+    # change date
+    @post.update_attribute(:updated_at, Time.now)
+    # touch
+    if !current_or_guest.like_posts.exists?(@post.id)
+      current_or_guest.like_posts << @post
+    end
     render 'edit' if current_user?(@post.user)
   end
   
@@ -25,8 +30,10 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = current_or_guest.posts.build(post_params)
+    @user = current_or_guest
+    @post = @user.posts.build(post_params)
     if @post.save
+      @user.like_posts << @post
       flash[:success] = "Post created!"
       redirect_to root_url
     else
@@ -43,6 +50,8 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
     if @post.update_attributes(post_params)
       flash[:success] = "Post updated"
+      # change date
+      @post.update_attribute(:created_at, Time.now)
       redirect_back_or(root_url)
     else
       render 'show'

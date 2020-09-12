@@ -4,7 +4,7 @@
   <aside class="col">
     <section class="post_info">
       <h3><%= link_to @post.user.name, @post.user %></h3>
-      <p class="timestamp">Posted <%= time_ago_in_words(@post.updated_at) %> ago.</p>
+      <p class="timestamp">Posted <%= time_ago_in_words(@post.created_at) %> ago.</p>
       <%= simple_format @post.content %>
     </section>
     <%= form_for @post, url: append_post_path(@post) do |f| %>

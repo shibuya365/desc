@@ -1,1 +1,25 @@
+one:
+  user: michael
+  post: orange
 
+two:
+  user: michael
+  post: tau_manifesto
+
+three:
+  user: michael
+  post: cat_video
+
+four:
+  user: lana
+  post: orange
+
+five:
+  user: archer
+  post: orange
+
+<% 40.times do |n| %>
+likes_<%= n %>:
+  user: michael
+  post: post_<%= n %>
+<% end %>

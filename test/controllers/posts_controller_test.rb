@@ -13,7 +13,7 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
   test "should get home" do
     get root_path
     assert_response :success
-    # もっとも新しいupdated_atが含まれているか
+    # もっとも新しいcreated_atが含まれているか
     assert_match posts(:most_recent_updated).content, response.body
     assert_select "title", "Edited by everyone | #{@base_title}"
   end
@@ -31,7 +31,7 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
   test "should get show" do
     get post_path(@post)
     assert_response :success
-    assert_equal @post, Post.all.order(created_at: "DESC").first
+    assert_equal @post, Post.all.order(updated_at: "DESC").first
     assert_select "title", "Post | #{@base_title}"
   end
 

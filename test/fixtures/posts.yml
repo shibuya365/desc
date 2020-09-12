@@ -28,7 +28,7 @@ most_recent_updated:
   created_at: <%= Time.zone.now %>
   user: michael
 
-<% 30.times do |n| %>
+<% 40.times do |n| %>
 post_<%= n %>:
   content: <%= Faker::Lorem.sentence(5) %>
   created_at: <%= 42.days.ago %>

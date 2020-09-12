@@ -3,6 +3,7 @@ require 'test_helper'
 class PostsInterfaceTest < ActionDispatch::IntegrationTest
   def setup
     @user = users(:michael)
+    @post = posts(:ants)
   end
 
   test "post interface" do
@@ -29,23 +30,29 @@ class PostsInterfaceTest < ActionDispatch::IntegrationTest
       delete post_path(first_post)
     end
     # 違うユーザーのプロフィールにアクセス (削除リンクがないことを確認)
-    get user_path(users(:archer))
+    get user_path(users(:malory))
     assert_select 'a', text: 'delete', count: 0
   end
 
   test "post sidebar count" do
     log_in_as(@user)
     get user_path(@user)
-    assert_match "Posts (#{@user.posts.count})", response.body
+    assert_match "Posts (#{@user.like_posts.count})", response.body
     # まだマイクロポストを投稿していないユーザー
     other_user = users(:malory)
     log_in_as(other_user)
     get user_path(other_user)
-    # assert_match "Post (0)", response.body
     other_user.posts.create!(content: "A post")
     get user_path(other_user)
-    assert_match "Posts (1)", response.body
+    assert_match "Posts (#{other_user.like_posts.count})", response.body
+    # assert_match "Posts (1)", response.body
   end
 
+  test "check add touch when create" do
+    assert_difference 'Like.count', 1 do
+      log_in_as(@user)
+      post posts_path, params: { post: { content: "like" } }
+    end
+  end
 
 end
