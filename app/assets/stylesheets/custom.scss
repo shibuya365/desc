@@ -13,26 +13,35 @@
 //   @include box_sizing;
 // }
 
-
+// フロートボタン
 #btn-new-post {
   position: fixed;
   right: 5vw;
-  bottom: 10vh;
+  bottom: 15vh;
 }
 
-// #new_post {
-//   .field {
-//     height: 80vh;
-//   }
+.btn-return {
+  position: fixed;
+  right: 5vw;
+  bottom: 15vh;  
+}
+
+
+共通フロートボタン
+// .btn-float {
+//   // position: fixed;
+//   height: 100px;
+//   width: 100px;
+//   // right: 15vw;
+//   // bottom: 15vh;
 // }
 
+// ニューポストの入力欄
 #post_content {
-  margin-top: 5vh;
-  height: 75vh;
+  height: 1000vh;
   resize: none;
   overflow-y: scroll;
 }
-
 
 
 
@@ -98,6 +107,7 @@ input, textarea, select, .uneditable-input {
     padding: 1vh 0;
     border-top: 1px solid #e8e8e8;
   }
+
   .user {
     // margin-top: 5em;
     // padding-top: 0;

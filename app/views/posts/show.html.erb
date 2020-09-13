@@ -12,7 +12,9 @@
       <div class="field">
         <%= f.text_area :addendum, placeholder: "Add post..." %>
       </div>
-      <%= f.submit "Add", class: "btn btn-primary" %>
+      <%= f.submit "Add", class: "btn-float btn btn-primary" %>
     <% end %>
   </aside>
 </div>
+
+<%= link_to "⬅️", session[:forwarding_url] || root_url, class: "btn-return btn btn-primary" %>
