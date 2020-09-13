@@ -125,14 +125,14 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
     content = @post.content
     patch append_post_path(@post), params: { post: { addendum: "addendum"} }
     @post.reload
-    assert_equal( @post.content, content + "\n" + "---" + "\n" + Time.now.to_s + "\n" + @user.name + "\n" + "addendum")
+    assert_equal( @post.content, content + "\n" + "\n" + "---" + "\n" + "\n" + Date.today.to_s + "\n" + @user.name + "\n" + "addendum" + "\n")
   end
 
   test "should get append without loggin" do
     content = @post.content
     patch append_post_path(@post), params: { post: { addendum: "addendum"} }
     @post.reload
-    assert_equal( @post.content, content + "\n" + "---" + "\n" + Time.now.to_s + "\n" + "Guest" + "\n" + "addendum")
+    assert_equal( @post.content, content + "\n" + "\n" + "---" + "\n" + "\n" + Date.today.to_s + "\n" + "Guest" + "\n" + "addendum" + "\n")
   end
 
   test "should not get append if blank?" do

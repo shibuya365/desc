@@ -67,7 +67,7 @@ class PostsController < ApplicationController
   def append
     if !params[:post][:addendum].blank?
       @post = Post.find(params[:id])
-      @post.content += "\n" + "\n" + "---" + "\n" + "\n" + Time.now.to_s + "\n" + current_or_guest.name + "\n" + params[:post][:addendum]+ "\n"
+      @post.content += "\n" + "\n" + "---" + "\n" + "\n" + Date.today.to_s + "\n" + current_or_guest.name + "\n" + params[:post][:addendum]+ "\n"
       @post.created_at = Time.now
       # @post.update_attribute(:created_at, Time.now)
       @post.save
