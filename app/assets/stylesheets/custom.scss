@@ -1,9 +1,9 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
-* {
-  box-sizing: border-box;
-}
+// * {
+//   box-sizing: border-box;
+// }
 
 // .debug_dump {
 //   clear: both;
@@ -26,30 +26,13 @@
   bottom: 15vh;  
 }
 
-
-共通フロートボタン
-// .btn-float {
-//   // position: fixed;
-//   height: 100px;
-//   width: 100px;
-//   // right: 15vw;
-//   // bottom: 15vh;
-// }
-
-// ニューポストの入力欄
-#post_content {
-  height: 1000vh;
-  resize: none;
-  overflow-y: scroll;
+// footerも固定
+#footer-menu {
+  position: fixed;
+  bottom: 0; /*下に固定*/
 }
 
-
-
-
-
-
 /* forms */
-
 input, textarea, select, .uneditable-input {
   // border: 1px solid #bbb;
   width: 100%;
@@ -67,11 +50,6 @@ input, textarea, select, .uneditable-input {
   }
 }
 
-#footer-menu {
-  position: fixed;
-  bottom: 0; /*下に固定*/
-}
-
 .checkbox {
   // margin-top: -10px;
   margin-bottom: 10px;
@@ -82,7 +60,7 @@ input, textarea, select, .uneditable-input {
 }
 
 #session_remember_me {
-  // width: auto;
+  width: auto;
   margin-left: 0;
 }
 
@@ -108,10 +86,10 @@ input, textarea, select, .uneditable-input {
     border-top: 1px solid #e8e8e8;
   }
 
-  .user {
+  // .user {
     // margin-top: 5em;
     // padding-top: 0;
-  }
+  // }
   .content {
     display: block;
     margin-left: 3vw;
